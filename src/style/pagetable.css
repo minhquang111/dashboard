@@ -1,0 +1,130 @@
+.box__wrapper{
+    padding-top: 80px; 
+    padding-left: 30px; 
+    padding-right: 30px;
+}
+
+.box__route{
+    font-size: 15px; 
+    font-weight: 400; 
+    color: rgb(117, 117, 117); 
+    padding-bottom: 15px; 
+}
+
+.table__wrapper{
+    padding: 10px;
+    background-color: white;
+    border: 1px solid rgba(1, 1, 1, 0.1);
+    box-shadow: 2px 2px 2px rgba(1, 1, 1, 0.1);
+    border-radius: 3px;
+}
+
+
+.table__wrapper h2{
+    font-size: 24px; 
+    font-weight: 500; 
+    margin-bottom: 20px;
+}
+
+.line-bottom{
+    border: none;
+    height: 1px;
+    margin: 0;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.table__content{
+    width: 100%;
+}
+
+.table__header{
+    text-align: left;
+}
+
+.table__content, .table__content td, .table__content th{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-collapse: collapse;
+    font-size: 15px;
+}
+.table__content td{
+    padding: 16px;
+}
+
+.table__content th{
+    padding: 8px 16px;
+}
+
+.table__footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.group-button{
+    display: flex;
+    align-items: center;
+}
+.btn{
+    margin-right: 1em;
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+    min-width: 0;
+    box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-success{
+    background-color: rgb(102, 187, 106);
+    color: white;
+}
+.btn-success:hover, .btn-success:active{
+    background-color: rgb(90, 163, 93);
+}
+
+.btn-light{
+    color: grey;
+    fill: rgb(158, 158, 158);
+}
+
+.btn-light:hover, .btn-light:active{
+    background-color: rgba(1, 1, 1, 0.151);
+}
+
+.table__paginate{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    align-items: center;
+}
+.table__paginate button{
+    height: 32px;
+    min-width: 32px;
+    margin: 0 3px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 400;
+    line-height: 1.43;
+    border-radius: 16px;
+    border: 1px solid  rgba(0, 0, 0, 0.2);
+    background: white;
+    cursor: pointer;
+}
+
+.table__paginate button:hover{
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.table__paginate button:active{
+    color: #3f51b5;
+    border: 1px solid rgba(63, 81, 181, 0.5);
+    background-color: rgba(63, 81, 181, 0.12);
+}
+
+.table__paginate button:disabled{
+    opacity: 0.7;
+}
