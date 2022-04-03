@@ -1,4 +1,4 @@
-import "../../style/pagetable.css";
+import "../style/pagetable.css";
 
 const About = () => {
   return (

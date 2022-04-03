@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from "./components/layout/Navbar";
-import Sidebar from "./components/layout/Sidebar";
-import About from "./components/view/About";
-import Customer from "./components/view/Customer";
-import Dashboard from "./components/view/Dashboard";
-import Order from "./components/view/Order";
-import Product from "./components/view/Product";
-import CustomerContextProvider from "./contexts/customerContext";
-import ProductContextProvider from "./contexts/productContext";
-import OrderContextProvider from "./contexts/orderContext";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import Product from "./pages/Product";
+import Order from "./pages/Order";
+import ApplicationProduct from "./components/product/ApplicationProduct";
+import { useDispatch } from "react-redux";
+import { getCategory } from "./actions/categoryActions";
+import { getProducts } from "./actions/productActions";
+import { getOrders } from "./actions/orderActions";
+import ApplicationOrder from "./components/order/ApplicationOrder";
 
 import "./style/App.css";
 
@@ -18,27 +18,34 @@ function App() {
   const showSidebar = () => {
     setOpenSidebar(!openSidebar);
   };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategory());
+    dispatch(getProducts());
+    dispatch(getOrders());
+  }, []);
+
   return (
-    <CustomerContextProvider>
-      <ProductContextProvider>
-        <OrderContextProvider>
-          <Router>
-            <Sidebar openSidebar={openSidebar} />
-            <div className={openSidebar ? "container active" : "container"}>
-              <Navbar showSidebar={showSidebar} openSidebar={openSidebar} />
-              <Switch>
-                <Route exact path="/" component={Dashboard} />
-                <Route exact path="/dashboard" component={Dashboard} />
+    <Router>
+      <Sidebar openSidebar={openSidebar} />
+      <div className={openSidebar ? "container active" : "container"}>
+        <Navbar showSidebar={showSidebar} openSidebar={openSidebar} />
+        <Switch>
+          <Route exact path="/" component={ApplicationOrder} />
+          <Route exact path="/product" component={Product} />
+          <Route exact path="/product/:id" component={ApplicationProduct} />
+          <Route exact path="/newproduct" component={ApplicationProduct} />
+          <Route exact path="/order" component={Order} />
+          <Route exact path="/order/:id" component={ApplicationOrder} />
+          {/* <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/customer" component={Customer} />
-                <Route exact path="/order" component={Order} />
-                <Route exact path="/product" component={Product} />
-                <Route exact path="/about" component={About} />
-              </Switch>
-            </div>
-          </Router>
-        </OrderContextProvider>
-      </ProductContextProvider>
-    </CustomerContextProvider>
+               
+               
+                <Route exact path="/about" component={About} /> */}
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

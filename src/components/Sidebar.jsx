@@ -1,4 +1,4 @@
-import "../../style/sidebar.css";
+import "../style/sidebar.css";
 import { Link } from "react-router-dom";
 
 const Sidebar = ({ openSidebar }) => {

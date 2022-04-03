@@ -1,4 +1,4 @@
-import "../../style/navbar.css";
+import "../style/navbar.css";
 
 const Navbar = ({ openSidebar, showSidebar }) => {
   return (

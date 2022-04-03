@@ -1,21 +1,13 @@
 import { useContext, useEffect } from "react";
-import { CustomerContext } from "../../contexts/customerContext";
 
-import "../../style/pagetable.css";
+import "../style/pagetable.css";
 
 const Customer = () => {
-  const {
-    customerState: { customers, customerLoading },
-    getCustomer,
-  } = useContext(CustomerContext);
-
-  useEffect(() => getCustomer(), []);
-
   return (
     <div className="box__wrapper">
       <p className="box__route">React CRM / Customer</p>
       <div className="table__wrapper">
-        <h2>Customers ({customers.length})</h2>
+        <h2>Customers (11)</h2>
         <hr className="line-bottom"></hr>
         <table className="table__content">
           <thead className="table__header">
@@ -29,25 +21,23 @@ const Customer = () => {
             </tr>
           </thead>
           <tbody className="table__body">
-            {customers.map((customer) => (
-              <tr>
-                <td>{customer.firstname}</td>
-                <td>{customer.lastname}</td>
-                <td>{customer.email}</td>
-                <td>{customer.mobile}</td>
-                <td>{customer.membership}</td>
-                <td>
-                  <div className="group-button">
-                    <button className="btn btn-success">
-                      <i className="fa-solid fa-pen"></i>
-                    </button>
-                    <button className="btn btn-light">
-                      <i className="fa-solid fa-trash-can"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+            <tr>
+              <td>customer.firstname</td>
+              <td>customer.lastname</td>
+              <td>customer.email</td>
+              <td>customer.mobile</td>
+              <td>customer.membership</td>
+              <td>
+                <div className="group-button">
+                  <button className="btn btn-success">
+                    <i className="fa-solid fa-pen"></i>
+                  </button>
+                  <button className="btn btn-light">
+                    <i className="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
         <div className="table__footer">
