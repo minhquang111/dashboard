@@ -1,4 +1,11 @@
 import { database } from "../api/database";
+import {
+  GET_PRODUCTS,
+  DELETE_PRODUCT,
+  GET_SINGLE_PRODUCT,
+  EDIT_SINGLE_PRODUCT,
+  ADD_NEW_PRODUCT,
+} from "../types";
 
 export const getProducts = () => {
   const { products } = database;
@@ -11,35 +18,35 @@ export const getProducts = () => {
   });
 
   return {
-    type: "GET_PRODUCTS",
+    type: GET_PRODUCTS,
     payload: data,
   };
 };
 
 export const deleteProduct = (product) => {
   return {
-    type: "DELETE_PRODUCT",
+    type: DELETE_PRODUCT,
     payload: product,
   };
 };
 
 export const getSingleProduct = (id) => {
   return {
-    type: "GET_SINGLE_PRODUCT",
+    type: GET_SINGLE_PRODUCT,
     payload: id,
   };
 };
 
 export const editSingleProduct = (product) => {
   return {
-    type: "EDIT_SINGLE_PRODUCT",
+    type: EDIT_SINGLE_PRODUCT,
     payload: product,
   };
 };
 
 export const addNewProduct = (newProduct) => {
   return {
-    type: "ADD_NEW_PRODUCT",
+    type: ADD_NEW_PRODUCT,
     payload: newProduct,
   };
 };

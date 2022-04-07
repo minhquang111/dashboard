@@ -1,14 +1,14 @@
 import { randomNumber } from "../utils";
+import {
+  GET_PRODUCTS,
+  DELETE_PRODUCT,
+  GET_SINGLE_PRODUCT,
+  EDIT_SINGLE_PRODUCT,
+  ADD_NEW_PRODUCT,
+} from "../types";
 const initialState = {
   list: [],
-  singleProduct: {
-    category: String,
-    categoryId: Number,
-    id: Number,
-    name: String,
-    numInStock: Number,
-    unitPrice: Number,
-  },
+  singleProduct: null,
 };
 const productReducers = (
   state = {
@@ -17,24 +17,24 @@ const productReducers = (
   action
 ) => {
   switch (action.type) {
-    case "GET_PRODUCTS": {
+    case GET_PRODUCTS: {
       if (state.list) return state;
       return { ...state, list: action.payload };
     }
-    case "DELETE_PRODUCT": {
+    case DELETE_PRODUCT: {
       return {
         ...state,
         list: state.list.filter((product) => product.id !== action.payload.id),
       };
     }
-    case "GET_SINGLE_PRODUCT":
+    case GET_SINGLE_PRODUCT:
       return {
         ...state,
         singleProduct: state.list.find(
           (product) => product.id === action.payload
         ),
       };
-    case "EDIT_SINGLE_PRODUCT":
+    case EDIT_SINGLE_PRODUCT:
       return {
         ...state,
         list: state.list.map((product) => {
@@ -44,7 +44,7 @@ const productReducers = (
           return product;
         }),
       };
-    case "ADD_NEW_PRODUCT":
+    case ADD_NEW_PRODUCT:
       const newProduct = action.payload;
       newProduct.id = randomNumber();
 

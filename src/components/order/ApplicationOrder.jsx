@@ -1,3 +1,8 @@
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useLocation, useHistory } from "react-router-dom";
+import { getSingleOrder, editSingleOrder } from "../../actions/orderActions";
+
 import "../../style/pagetable.css";
 import {
   TableContainer,
@@ -11,10 +16,6 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import SaveIcon from "@mui/icons-material/Save";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import { getSingleOrder, editSingleOrder } from "../../actions/orderActions";
 
 const ApplicationOrder = () => {
   // state
@@ -65,8 +66,6 @@ const ApplicationOrder = () => {
     setCountry(singleOrder.shipAddress.country);
     setZipcode(singleOrder.shipAddress.zipcode);
   };
-
-  console.log("singleOrder", singleOrder);
 
   const handleSave = () => {
     if (pathname.split("/")[1] === "order") {
@@ -265,3 +264,5 @@ const ApplicationOrder = () => {
 };
 
 export default ApplicationOrder;
+
+

@@ -1,50 +1,68 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
+import ProtectedRoute from "./components/routing/ProtectedRoute";
 import Product from "./pages/Product";
+import Customer from "./pages/Customer";
 import Order from "./pages/Order";
 import ApplicationProduct from "./components/product/ApplicationProduct";
-import { useDispatch } from "react-redux";
+import ApplicationOrder from "./components/order/ApplicationOrder";
+import ApplicationCustomer from "./components/customer/ApplicationCustomer";
+import Landing from "./components/Landing";
+import Changepass from "./components/auth/Changepass";
+
 import { getCategory } from "./actions/categoryActions";
 import { getProducts } from "./actions/productActions";
 import { getOrders } from "./actions/orderActions";
-import ApplicationOrder from "./components/order/ApplicationOrder";
+import { getCustomers } from "./actions/customerActions";
 
-import "./style/App.css";
+import Auth from "./pages/Auth";
 
 function App() {
-  const [openSidebar, setOpenSidebar] = useState(false);
-  const showSidebar = () => {
-    setOpenSidebar(!openSidebar);
-  };
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategory());
     dispatch(getProducts());
     dispatch(getOrders());
+    dispatch(getCustomers());
   }, []);
 
   return (
     <Router>
-      <Sidebar openSidebar={openSidebar} />
-      <div className={openSidebar ? "container active" : "container"}>
-        <Navbar showSidebar={showSidebar} openSidebar={openSidebar} />
-        <Switch>
-          <Route exact path="/" component={ApplicationOrder} />
-          <Route exact path="/product" component={Product} />
-          <Route exact path="/product/:id" component={ApplicationProduct} />
-          <Route exact path="/newproduct" component={ApplicationProduct} />
-          <Route exact path="/order" component={Order} />
-          <Route exact path="/order/:id" component={ApplicationOrder} />
-          {/* <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/customer" component={Customer} />
-               
-               
-                <Route exact path="/about" component={About} /> */}
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/login" component={Auth} />
+
+        <ProtectedRoute exact path="/changepass" component={Changepass} />
+        {/* product */}
+        <ProtectedRoute exact path="/product" component={Product} />
+        <ProtectedRoute
+          exact
+          path="/product/:id"
+          component={ApplicationProduct}
+        />
+        <ProtectedRoute
+          exact
+          path="/newproduct"
+          component={ApplicationProduct}
+        />
+        {/* order */}
+        <ProtectedRoute exact path="/order" component={Order} />
+        <ProtectedRoute exact path="/order/:id" component={ApplicationOrder} />
+        {/* customer */}
+        <ProtectedRoute exact path="/customer" component={Customer} />
+        <ProtectedRoute
+          exact
+          path="/customer/:id"
+          component={ApplicationCustomer}
+        />
+        <ProtectedRoute
+          exact
+          path="/newcustomer"
+          component={ApplicationCustomer}
+        />
+      </Switch>
     </Router>
   );
 }

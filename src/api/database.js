@@ -6,6 +6,7 @@ export const database = {
       lastname: "",
       email: "admin@test.com",
       password: "password",
+      avatar: "/assets/img/avatar3.png",
     },
   },
   customers: [

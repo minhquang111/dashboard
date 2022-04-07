@@ -31,3 +31,19 @@
     flex-shrink: 0;
     background-color: rgba(0, 0, 0, 0.12);
 }
+
+.customer-img{
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    margin: -10px 0px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.appCustomer-img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.438);
+}

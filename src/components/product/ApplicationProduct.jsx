@@ -1,3 +1,12 @@
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useLocation, useHistory } from "react-router-dom";
+import {
+  getSingleProduct,
+  editSingleProduct,
+  addNewProduct,
+} from "../../actions/productActions";
+
 import "../../style/pagetable.css";
 import {
   TableContainer,
@@ -9,14 +18,6 @@ import {
 } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import SaveIcon from "@mui/icons-material/Save";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import {
-  getSingleProduct,
-  editSingleProduct,
-  addNewProduct,
-} from "../../actions/productActions";
 
 const ApplicationProduct = () => {
   // state
@@ -34,8 +35,7 @@ const ApplicationProduct = () => {
 
   useEffect(() => {
     if (pathname.split("/")[1] === "product") {
-      const id = pathname.split("/")[2];
-      dispatch(getSingleProduct(parseInt(id)));
+      dispatch(getSingleProduct(+pathname.split("/")[2]));
     }
   }, [pathname]);
 
@@ -59,26 +59,26 @@ const ApplicationProduct = () => {
 
   const handleSave = () => {
     if (pathname.split("/")[1] === "product") {
-      const product = {
-        category,
-        categoryId: singleProduct.categoryId,
-        id: singleProduct.id,
-        name,
-        numInStock: parseInt(numInStock),
-        unitPrice: parseInt(unitPrice),
-      };
-      dispatch(editSingleProduct(product));
+      dispatch(
+        editSingleProduct({
+          category,
+          id: singleProduct.id,
+          categoryId: singleProduct.categoryId,
+          name,
+          numInStock: +numInStock,
+          unitPrice: +unitPrice,
+        })
+      );
     } else if (pathname.split("/")[1] === "newproduct") {
-      const newProduct = {
-        category,
-        categoryId: categoryList.find((x) => x.name === category).id,
-        name,
-        numInStock: parseInt(numInStock),
-        unitPrice: parseInt(unitPrice),
-      };
-
-      console.log("newProduct", newProduct);
-      dispatch(addNewProduct(newProduct));
+      dispatch(
+        addNewProduct({
+          category,
+          categoryId: categoryList.find((c) => c.name === category).id,
+          name,
+          numInStock: +numInStock,
+          unitPrice: +unitPrice,
+        })
+      );
     }
   };
 
@@ -111,7 +111,6 @@ const ApplicationProduct = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <TextField
-              id="outlined-basic"
               label="Product"
               variant="outlined"
               sx={{ width: "100%" }}
@@ -122,7 +121,6 @@ const ApplicationProduct = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <TextField
-              id="outlined-basic"
               label="Price"
               variant="outlined"
               sx={{ width: "100%" }}
@@ -134,7 +132,6 @@ const ApplicationProduct = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <TextField
-              id="outlined-basic"
               label="Quantity"
               variant="outlined"
               sx={{ width: "100%" }}
@@ -166,7 +163,6 @@ const ApplicationProduct = () => {
           </Button>
           <Button
             variant="contained"
-            // color="primary"
             sx={{ ml: 2 }}
             onClick={handleBack}
             startIcon={<ArrowBackIosNewIcon />}
